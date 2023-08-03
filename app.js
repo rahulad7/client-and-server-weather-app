@@ -5,6 +5,7 @@ const fetchWeatherDataByCountry = async (city) => {
   let url = `https://api.weatherapi.com/v1/forecast.json?key=${api_key}&q=${city}&days=7`;
   const res = await fetch(url);
   const data = await res.json();
+  console.log(data);
   return data;
 };
 
@@ -90,10 +91,6 @@ searchInput.addEventListener("input", filterCities);
 
 fetchCities().then((cities) => renderCities(cities));
 
-function getWeekDayFromDate(date) {
-  return new Date(date).toLocaleString("en-us", { weekday: "short" });
-}
-
 function updateWeatherForecast(weatherData) {
   document.querySelector(".temp").innerHTML =
     Math.round(weatherData.current.temp_c) + "°c";
@@ -156,6 +153,10 @@ function renderWeekdayTemp(forecastDays) {
     const weekDayTempHtml = getWeekdayTempHtml(weekDay, icon, avgtemp_c);
     container.insertAdjacentHTML("beforeend", weekDayTempHtml);
   });
+}
+
+function getWeekDayFromDate(date) {
+  return new Date(date).toLocaleString("en-us", { weekday: "short" });
 }
 
 // geolocation to find the weather of current location
