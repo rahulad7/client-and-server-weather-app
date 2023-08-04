@@ -1,10 +1,6 @@
 const express = require("express");
 const path = require("path");
-const {
-  getLocationFromIp,
-  fetchWeatherDataByCountry,
-  fetchCities,
-} = require("./utils");
+const { getLocationFromIp, fetchWeatherDataByCountry } = require("./shared");
 
 const app = express();
 
@@ -12,9 +8,12 @@ const port = 3000;
 
 app.set("view engine", "ejs");
 
+app.use(express.static(path.join(__dirname, "public")));
+
 app.get("/", async (req, res) => {
   const data = await getLocationFromIp();
   const values = await fetchWeatherDataByCountry(data.city);
+  console.log(fetchWeatherDataByCountry("hello"));
   const dateToday = new Date(values.location.localtime).toLocaleDateString(
     "en-uS",
     {
@@ -53,14 +52,12 @@ app.get("/", async (req, res) => {
 
   res.render("index", { dynamicData });
 });
-app.use(express.static(path.join(__dirname, "public")));
-// app.get("/", (req, res) => {
-//   // res.sendFile(path.join(__dirname, "index.html"));
-//   res.send(dt.renderDynamicHtml(fdf));
-// });
 
 app.get("/app.js", (req, res) => {
   res.sendFile(path.join(__dirname, "app.js"));
+});
+app.get("/shared.js", (req, res) => {
+  res.sendFile(path.join(__dirname, "shared.js"));
 });
 
 app.use((req, res) => {

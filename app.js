@@ -1,21 +1,10 @@
-let target = "bangalore";
-const fetchWeatherDataByCountry = async (city) => {
-  // console.log("city", city);
-  const api_key = "API KEY";
-  let url = `https://api.weatherapi.com/v1/forecast.json?key=${api_key}&q=${city}&days=7`;
-  const res = await fetch(url);
-  const data = await res.json();
-  console.log(data);
-  return data;
-};
+//fetching api function call from shared.js and inserting in index.js
 
 const searchInput = document.getElementById("searchInput");
 const cityList = document.getElementById("cityList");
 const searchform = document.querySelector(".searchform");
 const result = document.querySelector(".result");
 const searchbtn = document.querySelector(".searchbtn");
-
-// let cities = []; // Array to store the city data
 
 // Function to fetch the list of cities from the API
 async function fetchCities() {
@@ -179,19 +168,6 @@ function error() {
 
 // to show default getWeekdayTempHtml
 getCurrentLocation();
-// .then(success)
-// .then((x) => {
-//   fetchWeatherDataByCountry(x).then((weatherData) => {
-//     renderWeekdayTemp(weatherData.forecast.forecastday);
-//     updateWeatherForecast(weatherData);
-//   });
-// })
-// .catch((error) => {
-//   fetchWeatherDataByCountry("belgaum").then((weatherData) => {
-//     renderWeekdayTemp(weatherData.forecast.forecastday);
-//     updateWeatherForecast(weatherData);
-//   });
-// });
 
 function fetchaAllFunctions(query) {
   fetchWeatherDataByCountry(query).then((weatherData) => {
