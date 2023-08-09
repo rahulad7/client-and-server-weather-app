@@ -11,7 +11,7 @@ const getLocationFromIp = async () => {
 };
 
 const fetchWeatherDataByCountry = async (city) => {
-  const api_key = "1d35dcc8063b4122ad764306233001";
+  const api_key = "API_KEY";
   let url = `https://api.weatherapi.com/v1/forecast.json?key=${api_key}&q=${city}&days=7`;
   const res = await fetch(url);
   const data = await res.json();
